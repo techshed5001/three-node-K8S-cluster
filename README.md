@@ -11,6 +11,7 @@ self-managed lab environment used to explore and validate Kubernetes concepts in
 The cluster consists of an Intel NUC, two Apple MacBook laptops and a 5 port network switch.
  
 <img src="images/k8s-cluster.jpg" width="600"/>
+
 ## Step 1 — Configure Hostnames
 Run on each node.
 Control Plane

@@ -303,18 +303,19 @@ We will install:
 •	NGINX Ingress Controller 
 using the official bare-metal deployment method.
  
+# Install Ingress Controller 
 What the Ingress Controller Does
 The ingress controller:
-•	receives HTTP/HTTPS traffic 
-•	routes traffic to services inside Kubernetes 
-•	replaces NodePort-only access 
-•	enables: 
-o	hostnames 
-o	TLS 
-o	reverse proxy 
-o	path routing 
+- receives HTTP/HTTPS traffic 
+- routes traffic to services inside Kubernetes 
+- replaces NodePort-only access 
+- enables: 
+- hostnames 
+- TLS 
+- reverse proxy 
+- path routing 
  
-IMPORTANT NODE INFORMATION
+## IMPORTANT NODE INFORMATION
 Task	Run On
 kubectl apply commands	Control Plane ONLY
 Helm installation	Control Plane ONLY

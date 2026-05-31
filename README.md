@@ -1,6 +1,4 @@
 
-</>MARKDOWN
-
 # Kubernetes 3-Node Cluster Homelab
 
 I built a fully functional three-node Kubernetes cluster using three repurposed spare machines, consisting of one control 
@@ -12,7 +10,7 @@ self-managed lab environment used to explore and validate Kubernetes concepts in
 
 The cluster consists of an Intel NUC, two Apple MacBook laptops and a 5 port network switch.
  
-
+<img src="images/k8s-cluster.jpeg" width="600"/>
 ## Step 1 — Configure Hostnames
 Run on each node.
 Control Plane

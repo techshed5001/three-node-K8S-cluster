@@ -61,7 +61,7 @@ Bash
 free -h
 Swap should show 0B.
 
-Step 4 — Enable Required Kernel Modules
+## Step 4 — Enable Required Kernel Modules
 Run on ALL nodes.
 
 Create modules config:
@@ -77,7 +77,7 @@ Bash
 sudo modprobe overlay
 sudo modprobe br_netfilter
 
-Step 5 — Configure Kubernetes Networking Sysctl Settings
+## Step 5 — Configure Kubernetes Networking Sysctl Settings
 Run on ALL nodes.
 
 Create sysctl config:
@@ -100,7 +100,7 @@ Should return:
 
 net.ipv4.ip_forward = 1
 
-Step 6 — Install containerd
+## Step 6 — Install containerd
 Run on ALL nodes.
 
 Update packages:
@@ -148,7 +148,7 @@ Verify:
 Bash
 sudo systemctl status containerd
 
-Step 7 — Install Kubernetes Packages
+## Step 7 — Install Kubernetes Packages
 Run on ALL nodes.
 
 Create Kubernetes keyring directory:
@@ -182,7 +182,8 @@ Enable kubelet:
 
 Bash
 sudo systemctl enable kubelet
-Step 8 — Initialize the Control Plane
+
+## Step 8 — Initialize the Control Plane
 Run ONLY on the control plane node.
 
 Initialize cluster:
@@ -192,7 +193,7 @@ sudo kubeadm init \
   --pod-network-cidr=192.168.0.0/16
 This takes several minutes.
 
-Step 9 — Configure kubectl Access
+## Step 9 — Configure kubectl Access
 After initialization completes, run on the control plane node:
 
 Bash
@@ -205,7 +206,7 @@ Bash
 kubectl get nodes
 You should see the master node in NotReady state initially.
 
-Step 10 — Install Pod Network (Calico)
+## Step 10 — Install Pod Network (Calico)
 Run ONLY on the control plane node.
 
 Apply Calico:
@@ -220,7 +221,7 @@ Bash
 kubectl get pods -A
 Eventually all pods should become Running.
 
-Step 11 — Join Worker Nodes
+## Step 11 — Join Worker Nodes
 During kubeadm init, a join command is displayed.
 
 Example:
@@ -231,7 +232,7 @@ sudo kubeadm join 192.168.1.10:6443 \
   --discovery-token-ca-cert-hash sha256:xxxxxxxx
 Run that command on BOTH worker nodes.
 
-Step 12 — Verify Cluster
+## Step 12 — Verify Cluster
 Run on control plane:
 
 Bash
@@ -242,7 +243,8 @@ NAME           STATUS   ROLES           AGE   VERSION
 k8s-master     Ready    control-plane   10m   v1.30.x
 k8s-worker1    Ready    <none>          5m    v1.30.x
 k8s-worker2    Ready    <none>          5m    v1.30.x
-Step 13 — Test the Cluster
+
+## Step 13 — Test the Cluster
 Deploy nginx:
 
 Bash
@@ -321,7 +323,7 @@ Browser testing	Any machine on network
 You do NOT manually install ingress software on workers.
 Kubernetes schedules the ingress controller pods automatically.
  
-Step 1 — Verify Cluster Health
+## Step 1 — Verify Cluster Health
 Run on CONTROL PLANE node:
 kubectl get nodes
 Expected:
@@ -330,7 +332,7 @@ k8s-master      Ready    control-plane
 k8s-worker1     Ready    <none>
 k8s-worker2     Ready    <none>
  
-Step 2 — Install Helm (Recommended)
+## Step 2 — Install Helm (Recommended)
 Run ONLY on control plane.
 Install:
 •	Helm 
@@ -339,17 +341,17 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 Verify:
 helm version
  
-Step 3 — Add NGINX Ingress Helm Repository
+## Step 3 — Add NGINX Ingress Helm Repository
 Run ONLY on control plane.
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 Update repos:
 helm repo update
  
-Step 4 — Create Namespace
+## Step 4 — Create Namespace
 Run ONLY on control plane.
 kubectl create namespace ingress-nginx
  
-Step 5 — Install NGINX Ingress Controller
+## Step 5 — Install NGINX Ingress Controller
 Run ONLY on control plane.
 For bare-metal/home-lab clusters, use NodePort service type.
 helm install ingress-nginx ingress-nginx/ingress-nginx \
@@ -362,14 +364,14 @@ This deploys:
 •	RBAC 
 •	configmaps 
  
-Step 6 — Verify Installation
+## Step 6 — Verify Installation
 Run on control plane:
 kubectl get pods -n ingress-nginx
 Expected:
 NAME                                        READY   STATUS
 ingress-nginx-controller-xxxxx              1/1     Running
  
-Step 7 — Verify Service
+## Step 7 — Verify Service
 kubectl get svc -n ingress-nginx
 Example:
 NAME                                 TYPE       PORT(S)
@@ -379,14 +381,14 @@ Important:
 •	32443 = HTTPS NodePort 
 Your ports may differ.
  
-Step 8 — Verify Where Ingress Is Running
+## Step 8 — Verify Where Ingress Is Running
 kubectl get pods -n ingress-nginx -o wide
 You should see it scheduled on a worker node.
 Example:
 NODE
 k8s-worker1
  
-Step 9 — Deploy a Test Application
+## Step 9 — Deploy a Test Application
 Run on control plane.
 Create nginx deployment:
 kubectl create deployment nginx --image=nginx
@@ -395,7 +397,7 @@ kubectl scale deployment nginx --replicas=3
 Expose service internally:
 kubectl expose deployment nginx --port=80
  
-Step 10 — Create an Ingress Resource
+## Step 10 — Create an Ingress Resource
 Create file:
 nano nginx-ingress.yaml
 Paste:
@@ -420,13 +422,13 @@ Save file.
 Apply:
 kubectl apply -f nginx-ingress.yaml
  
-Step 11 — Verify Ingress
+## Step 11 — Verify Ingress
 kubectl get ingress
 Example:
 NAME            CLASS   HOSTS
 nginx-ingress   nginx   nginx.local
  
-Step 12 — Update Your LOCAL Machine Hosts File
+## Step 12 — Update Your LOCAL Machine Hosts File
 On your laptop/desktop (NOT cluster node):
 Linux/macOS
 Edit:
@@ -440,7 +442,7 @@ Use:
 •	worker node IP 
 •	or control plane IP 
  
-Step 13 — Access Application
+## Step 13 — Access Application
 Open browser:
 http://nginx.local:<nodeport>
 Example:
@@ -448,7 +450,7 @@ http://nginx.local:32080
 You should see:
 •	nginx welcome page 
  
-Step 14 — Understand Traffic Flow
+## Step 14 — Understand Traffic Flow
 Traffic path:
 Browser
   ↓

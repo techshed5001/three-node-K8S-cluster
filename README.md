@@ -373,14 +373,26 @@ NAME                                        READY   STATUS
 ingress-nginx-controller-xxxxx              1/1     Running
  
 ## Step 7 — Verify Service
+## Verify the Ingress Controller Service
+
+Run:
+
+```bash
 kubectl get svc -n ingress-nginx
-Example:
-NAME                                 TYPE       PORT(S)
-ingress-nginx-controller             NodePort   80:32080/TCP,443:32443/TCP
-Important:
-•	32080 = HTTP NodePort 
-•	32443 = HTTPS NodePort 
-Your ports may differ.
+```
+
+Example Output:
+
+```text
+NAME                        TYPE       PORT(S)
+ingress-nginx-controller    NodePort   80:32080/TCP,443:32443/TCP
+```
+
+### Important
+
+- `32080` = HTTP NodePort
+- `32443` = HTTPS NodePort
+- Your port numbers may differ.
  
 ## Step 8 — Verify Where Ingress Is Running
 kubectl get pods -n ingress-nginx -o wide
@@ -402,6 +414,7 @@ kubectl expose deployment nginx --port=80
 Create file:
 nano nginx-ingress.yaml
 Paste:
+
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress

@@ -420,6 +420,7 @@ spec:
             name: nginx
             port:
               number: 80
+```
 Save file.
 Apply:
 kubectl apply -f nginx-ingress.yaml

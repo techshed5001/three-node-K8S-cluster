@@ -402,6 +402,7 @@ kubectl expose deployment nginx --port=80
 Create file:
 nano nginx-ingress.yaml
 Paste:
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

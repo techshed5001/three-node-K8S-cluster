@@ -415,10 +415,11 @@ Kubernetes schedules the ingress controller pods automatically.
 Run on CONTROL PLANE node:
 kubectl get nodes
 Expected:
-NAME            STATUS   ROLES
-k8s-master      Ready    control-plane
-k8s-worker1     Ready    <none>
-k8s-worker2     Ready    <none>
+|NAME            |STATUS   |ROLES
+|----------------|---------|-------|
+| k8s-master    |  Ready  |  control-plane
+| k8s-worker1   |  Ready  |  <none>
+| k8s-worker2   |  Ready  |  <none>
  
 ## Step 2 — Install Helm (Recommended)
 Run ONLY on control plane.

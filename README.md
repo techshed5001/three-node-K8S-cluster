@@ -368,34 +368,38 @@ After the cluster is working, consider adding:
 - Storage 
   - Longhorn 
   - Rook 
-•	Observability 
-o	Prometheus 
-o	Grafana 
-•	GitOps 
-o	Argo CD 
-o	Flux 
+- Observability 
+  - Prometheus 
+  - Grafana 
+- GitOps 
+  - Argo CD 
+  - Flux 
+
 Install NGINX Ingress Controller on Your Kubernetes Cluster
+
 This guide assumes:
-•	Your 3-node Kubernetes cluster is operational 
-•	kubectl get nodes shows all nodes as Ready 
-•	You are using: 
-o	Kubernetes 
-o	containerd 
-o	Calico 
+- Your 3-node Kubernetes cluster is operational 
+- kubectl get nodes shows all nodes as Ready 
+- You are using: 
+  - Kubernetes 
+  - containerd 
+  - Calico 
+
 We will install:
-•	NGINX Ingress Controller 
+- NGINX Ingress Controller 
 using the official bare-metal deployment method.
  
 # Install Ingress Controller 
+
 The ingress controller:
-•	receives HTTP/HTTPS traffic 
-•	routes traffic to services inside Kubernetes 
-•	replaces NodePort-only access 
-•	enables: 
-o	hostnames 
-o	TLS 
-o	reverse proxy 
-o	path routing 
+- receives HTTP/HTTPS traffic 
+- routes traffic to services inside Kubernetes 
+- replaces NodePort-only access 
+- enables: 
+  - hostnames 
+  - TLS 
+  - reverse proxy 
+  - path routing 
 
  
 ## IMPORTANT NODE INFORMATION

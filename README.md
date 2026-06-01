@@ -14,6 +14,7 @@ The cluster consists of an Intel NUC, two Apple MacBook laptops and a 5 port net
 
 ## Step 1 — Configure Hostnames
 Run on each node.
+
 Control Plane
 Bash
 ````text
@@ -32,10 +33,13 @@ sudo hostnamectl set-hostname k8s-worker2
 
 ## Step 2 — Configure /etc/hosts
 Run on ALL nodes.
+
 Edit hosts file:
 
 Bash
+```text
 sudo nano /etc/hosts
+````
 Add:
 192.168.1.10 k8s-master
 192.168.1.11 k8s-worker1
@@ -43,9 +47,11 @@ Add:
 Test connectivity:
 
 Bash
+````text```
 ping k8s-master
 ping k8s-worker1
 ping k8s-worker2
+````
 
 ## Step 3 — Disable Swap
 Kubernetes requires swap disabled.
@@ -57,11 +63,16 @@ sudo swapoff -a
 Disable permanently:
 
 Bash
+````text
 sudo sed -i '/ swap / s/^/#/' /etc/fstab
+````
+
 Verify:
 
 Bash
+````text
 free -h
+````
 Swap should show 0B.
 
 ## Step 4 — Enable Required Kernel Modules
@@ -86,11 +97,13 @@ Run on ALL nodes.
 Create sysctl config:
 
 Bash
+````text
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-iptables = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 net.ipv4.ip_forward = 1
 EOF
+````
 Apply settings:
 
 Bash

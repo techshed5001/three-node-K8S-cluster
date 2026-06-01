@@ -134,15 +134,19 @@ Run on ALL nodes.
 Update packages:
 
 Bash
+```text
 sudo apt update
+````
 Install dependencies:
 
 Bash
+````text
 sudo apt install -y \
   ca-certificates \
   curl \
   gnupg \
   lsb-release
+````  
 Install containerd:
 
 Bash
@@ -150,14 +154,18 @@ sudo apt install -y containerd
 Create default config:
 
 Bash
+````text
 sudo mkdir -p /etc/containerd
 containerd config default | sudo tee /etc/containerd/config.toml
+````
 Enable Systemd cgroups (required/recommended)
 
 Edit config:
 
 Bash
+````text
 sudo nano /etc/containerd/config.toml
+````
 Find:
 
 TOML
@@ -169,48 +177,64 @@ SystemdCgroup = true
 Restart containerd:
 
 Bash
+````text
 sudo systemctl restart containerd
 sudo systemctl enable containerd
+````
 Verify:
 
 Bash
+````text
 sudo systemctl status containerd
-
+````
 ## Step 7 — Install Kubernetes Packages
 Run on ALL nodes.
 
 Create Kubernetes keyring directory:
 
 Bash
+````text
 sudo mkdir -p /etc/apt/keyrings
+````
 Add Kubernetes GPG key:
 
 Bash
+````text
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | \
 sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+````
 Add repository:
 
 Bash
+````text
 echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] \
 https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | \
 sudo tee /etc/apt/sources.list.d/kubernetes.list
+````
 Update:
 
 Bash
+````text
 sudo apt update
+````
 Install Kubernetes tools:
 
 Bash
+````text
 sudo apt install -y kubelet kubeadm kubectl
+````
 Prevent automatic upgrades:
 
 Bash
+````text
 sudo apt-mark hold kubelet kubeadm kubectl
+````
 Enable kubelet:
 
 Bash
+````text
 sudo systemctl enable kubelet
-
+````
 ## Step 8 — Initialize the Control Plane
 Run ONLY on the control plane node.
 

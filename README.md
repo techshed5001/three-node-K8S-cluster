@@ -304,17 +304,20 @@ Bash
 kubectl get nodes
 ````
 Expected output:
-
+````text
 NAME           STATUS   ROLES           AGE   VERSION
 k8s-master     Ready    control-plane   10m   v1.30.x
 k8s-worker1    Ready    <none>          5m    v1.30.x
 k8s-worker2    Ready    <none>          5m    v1.30.x
+````
 
 ## Step 13 — Test the Cluster
 Deploy nginx:
 
 Bash
+````text
 kubectl create deployment nginx --image=nginx
+````
 Scale deployment:
 
 Bash
@@ -357,13 +360,14 @@ kubectl logs <pod-name>
 ````
 
 Optional Next Steps
+
 After the cluster is working, consider adding:
-•	Ingress Controller 
-o	NGINX Ingress Controller 
-o	Traefik 
-•	Storage 
-o	Longhorn 
-o	Rook 
+- Ingress Controller 
+ -	NGINX Ingress Controller 
+ -	Traefik 
+-	Storage 
+ -	Longhorn 
+ -	Rook 
 •	Observability 
 o	Prometheus 
 o	Grafana 

@@ -47,7 +47,7 @@ Add:
 Test connectivity:
 
 Bash
-````text```
+````text
 ping k8s-master
 ping k8s-worker1
 ping k8s-worker2
@@ -59,7 +59,9 @@ Kubernetes requires swap disabled.
 Run on ALL nodes:
 
 Bash
+````text
 sudo swapoff -a
+````
 Disable permanently:
 
 Bash

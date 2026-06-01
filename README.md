@@ -363,11 +363,11 @@ Optional Next Steps
 
 After the cluster is working, consider adding:
 - Ingress Controller 
- -	NGINX Ingress Controller 
- -	Traefik 
+   -	 NGINX Ingress Controller 
+   -	 Traefik 
 -	Storage 
- -	Longhorn 
- -	Rook 
+   -	 Longhorn 
+   -	 Rook 
 •	Observability 
 o	Prometheus 
 o	Grafana 

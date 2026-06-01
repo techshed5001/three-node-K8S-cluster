@@ -41,9 +41,11 @@ Bash
 sudo nano /etc/hosts
 ````
 Add:
+````text
 192.168.1.10 k8s-master
 192.168.1.11 k8s-worker1
 192.168.1.12 k8s-worker2
+````
 Test connectivity:
 
 Bash
@@ -83,15 +85,19 @@ Run on ALL nodes.
 Create modules config:
 
 Bash
+````text
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
 EOF
+````
 Load modules:
 
 Bash
+````text
 sudo modprobe overlay
 sudo modprobe br_netfilter
+````
 
 ## Step 5 — Configure Kubernetes Networking Sysctl Settings
 Run on ALL nodes.
@@ -109,11 +115,15 @@ EOF
 Apply settings:
 
 Bash
+````text
 sudo sysctl --system
+````
 Verify:
 
 Bash
+````text
 sysctl net.ipv4.ip_forward
+````
 Should return:
 
 net.ipv4.ip_forward = 1

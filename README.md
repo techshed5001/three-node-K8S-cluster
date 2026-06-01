@@ -16,16 +16,19 @@ The cluster consists of an Intel NUC, two Apple MacBook laptops and a 5 port net
 Run on each node.
 Control Plane
 Bash
+````text
 sudo hostnamectl set-hostname k8s-master
-Worker 1
+````
 
 Bash
+````text
 sudo hostnamectl set-hostname k8s-worker1
-Worker 2
+````
 
 Bash
+````text
 sudo hostnamectl set-hostname k8s-worker2
-
+````
 
 ## Step 2 — Configure /etc/hosts
 Run on ALL nodes.
@@ -373,8 +376,6 @@ NAME                                        READY   STATUS
 ingress-nginx-controller-xxxxx              1/1     Running
  
 ## Step 7 — Verify Service
-## Verify the Ingress Controller Service
-
 Run:
 
 ```bash

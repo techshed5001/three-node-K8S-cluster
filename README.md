@@ -241,21 +241,27 @@ Run ONLY on the control plane node.
 Initialize cluster:
 
 Bash
+````text
 sudo kubeadm init \
   --pod-network-cidr=192.168.0.0/16
+  ````
 This takes several minutes.
 
 ## Step 9 — Configure kubectl Access
 After initialization completes, run on the control plane node:
 
 Bash
+````text
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+````
 Test:
 
 Bash
+````text
 kubectl get nodes
+````
 You should see the master node in NotReady state initially.
 
 ## Step 10 — Install Pod Network (Calico)
@@ -264,13 +270,17 @@ Run ONLY on the control plane node.
 Apply Calico:
 
 Bash
+````text
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/calico.yaml
+````
 Wait a few minutes.
 
 Verify pods:
 
 Bash
+````text
 kubectl get pods -A
+````
 Eventually all pods should become Running.
 
 ## Step 11 — Join Worker Nodes
@@ -279,16 +289,20 @@ During kubeadm init, a join command is displayed.
 Example:
 
 Bash
+````text
 sudo kubeadm join 192.168.1.10:6443 \
   --token abcdef.1234567890abcdef \
   --discovery-token-ca-cert-hash sha256:xxxxxxxx
+````
 Run that command on BOTH worker nodes.
 
 ## Step 12 — Verify Cluster
 Run on control plane:
 
 Bash
+````text
 kubectl get nodes
+````
 Expected output:
 
 NAME           STATUS   ROLES           AGE   VERSION
@@ -304,30 +318,43 @@ kubectl create deployment nginx --image=nginx
 Scale deployment:
 
 Bash
+````text
 kubectl scale deployment nginx --replicas=3
+````
 Check pods:
 
 Bash
+````text
 kubectl get pods -o wide
-
+````
 You should see pods distributed across workers.
 
 Useful Administrative Commands
 Cluster Info
 Bash
+````text
 kubectl cluster-info
+````
 Node Status
 Bash
+````text
 kubectl get nodes -o wide
+````
 Pod Status
 Bash
+````text
 kubectl get pods -A
+````
 Describe Problematic Pod
 Bash
+````text
 kubectl describe pod <pod-name>
+````
 View Logs
 Bash
+````text
 kubectl logs <pod-name>
+````
 
 Optional Next Steps
 After the cluster is working, consider adding:
